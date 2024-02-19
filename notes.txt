@@ -1,0 +1,40 @@
+Notas de Github Actions:
+
+Acción: Docker login (inicio de sesión en docker hub):
+    1. Ingresar al usuario de Docker Hub.
+    2. Ir al meno My Account.
+    3. Ir al la pestaña Security.
+    4. Presionar el boton "New Access Token".
+    5. Guardar el token de acceso en un sitio seguro.
+    6. Ir al usuario de github.
+    7. Ir a settings/secrets and variables/actions.
+    8. Presionar el boton "New repository secret".
+    9. Crear 2 variables: DOCKER_USER y DOCKER_PASSWORD.
+    10. DOCKER_USER = es el usuario de docker hub, ejm: nelsonjo14.
+    11. DOCKER_PASSWORD = es el token de acceso creado en docker hub.
+    12. Ir al archivo del proyecto: .github/workflows/docker-image.yml.
+    13. Agregar la acción con un nombre "Docker login" (name).
+    14. Agregar 2 variables de entorno: DOCKER_USER y DOCKER_PASSWORD (env).
+    15. Agregar el comando para hacer login en docker hub (run) agregando las variables de entorno.
+
+Acción: Git Semantic Version (Versionamiento Semántico Automatizado).
+    Url: https://github.com/marketplace/actions/git-semantic-version
+    1. name: Git Semantic Version (nombre de la acción).
+    2. uses: PaulHatch/semantic-version@v4.0.3 (ruta del plugin).
+    3. Configuración:
+    with:
+        major_pattern: 'major:'
+        minor_pattern: 'feat:'
+        format: '${major}.${minor}.${patch}-prerelease${increment}'
+    4. id: version (identificador de la acción).
+    5. Ojo: para que funcionen los patrones major y minor, colocar en el mensaje del commit " major: o feat: "
+
+Acción: Build Docker Image (creación de la imagen en docker hub).
+    1. Variable de entorno: NEW_VERSION.
+        NEW_VERSION: ${{steps.version.outputs.version}}
+        steps: pasos.
+        version: id de la acción.
+        outputs: arreglo con diferentes valores.
+        versión: variable de versionamiento (extraida del array outputs).
+
+Acción: Push Docker Image (subida de la imagen a docker hub).
