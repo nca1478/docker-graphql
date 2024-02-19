@@ -37,4 +37,4 @@ Acción: Build Docker Image (creación de la imagen en docker hub).
         outputs: arreglo con diferentes valores.
         versión: variable de versionamiento (extraida del array outputs).
 
-Acción: Push Docker Image (subida de la imagen a docker hub).
+Acción: Push Docker Image (subida de la imagen a docker hub)..
